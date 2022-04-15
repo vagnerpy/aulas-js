@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo_IMC</title>
+</head>
+<body>
+    <script>
+
+        function pulaLinha(){
+            document.write("<br>");
+            document.write("<br>");
+        }
+
+        function mostra(frase){
+            document.write(frase);
+            pulaLinha();
+        }
+
+        function calculaImc(altura, peso) {
+            return peso / (altura * altura) ;
+          //  var imc = peso / (altura * altura);
+            //return imc;
+        }
+
+     
+     var imcVagner = calculaImc(1.65, 83);
+     //var totalImc = calculaImc(1.71, 73) + calculaImc(1.72, 68); dar o mesmo resultado da variaveis abaixo
+     var imcAmigo = calculaImc(1.72,68);
+     var totalImc = imcVagner + imcAmigo
+     document.write(" A Soma dos icm's é "  + totalImc);
+
+
+     //mostra(imcVagner);
+     //mostra(imcAmigo);
+     
+     
+     //-----------------------------------------------------------------------------------------------------------
+     /*   var pesoVagner = 82;
+        var alturaVagner = 1.65;
+        var imcVagner = pesoVagner / (alturaVagner * alturaVagner);
+        mostra("O imc do Vagner é " + imcVagner);
+
+        var pesoAmigo = 68;
+        var alturaAmigo = 1.72;
+        var imcAmigo = pesoAmigo / (alturaAmigo * alturaAmigo);
+        mostra(" O imc do meu amigo é " + imcAmigo);
+        ==============================================================================================================
+        
+        Uma das formas de fazermos isso seria, em vez de termos dois parâmetros
+         altura, peso, quatro: altura1, peso1, altura2, peso2, os quais passaríamos em apenas um calculaImc():
+        
+        function calculaImc(altura1, peso1, altura2, peso2) {
+
+    var imc1 = peso1 / (altura1 * altura1);
+    var imc2 = peso2 / (altura2 * altura2);
+    var imcTotal = imc1 + imc2;
+    mostra("A soma dos imc's é " + imcTotal);
+
+}
+
+calculaImc(1.71, 73, 1.72, 68);
+
+Isso significa "not a number", ou seja, "não é um número". Algum elemento da operação ficou indefinido e fez com que 
+a operação não fosse bem sucedida. Sempre que fazemos uma operação matemática com valores não definidos temos este
+ resultado, NaN.
+ Portanto, descartaremos esta solução. Retornaremos ao código no seguinte estágio:
+========================================================================================================================
+       
+function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+    mostra("O imc calculado é " + imc);
+
+}
+
+calculaImc(1.71, 73);
+Não podemos manter em calculaImc() a mensagem "O imc calculado é " fixa, porque assim ele sempre exibirá
+ esta mesma mensagem. Se quisermos exibir outra, teremos inevitavelmente esta, que está fixada:
+
+
+
+
+ function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+
+}
+
+calculaImc(1.71, 73);
+
+Queremos que a fórmula funcione de forma genérica, para que onde inserimos uma informação de peso e altura,
+ ela nos dê o IMC calculado. Criaremos duas variáveis, a imcFlavio e a imcAmigo,
+ e indicaremos que cada uma delas receberá as respectivas informações de peso e altura de cada um:
+
+
+
+ function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+
+}
+
+var imcFlavio = calculaImc(1.71, 73);
+var imcAmigo = calculaImc(1.72, 68);
+
+Desta forma estamos dizendo que a variável do indivíduo receberá o IMC calculado com base em suas informações individuais.
+ Ou seja, ao chamarmos uma função, ela pode nos devolver um valor. 
+Para exibirmos estes valores calculados, utilizaremos a função mostra() para cada uma das informações:
+
+
+function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+
+}
+
+var imcFlavio = calculaImc(1.71, 73);
+var imcAmigo = calculaImc(1.72, 68);
+
+mostra(imcFlavio);
+mostra(imcAmigo);
+
+Salvaremos e recarregaremos o navegador, e o resultado foi o seguinte:
+
+undefined
+
+undefined
+
+Vamos entender... Nesta instrução,
+
+var imcFlavio = calculaImc(1.71, 73);
+
+
+Passamos as informações mas não indicamos que ele deve
+ nos devolver o resultado do cálculo. Se, por exemplo, o IMC
+  calculado fosse 50, teríamos a seguinte situação:
+
+
+  var imcFlavio = 50;
+
+  A variável recebe a função de calcular e, ao final, deve devolver um resultado dentro da própria variável. 
+  Só que em momento algum foi declarado na função
+   que ela deve devolver o valor de imc. Para fazê-lo utiliza-se a palavra return, ou "retorna". Ele retornará o imc:
+
+
+   function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+    return imc;
+
+}
+
+var imcFlavio = calculaImc(1.71, 73);
+var imcAmigo = calculaImc(1.72, 68);
+
+mostra(imcFlavio);
+mostra(imcAmigo);
+
+Ao calcularmos o IMC dentro da função, e a variável IMC guardar o resultado, a palavra return
+ deixa disponível à esquerda da variável
+ o resultado que foi calculado pela função. Salvaremos e recarregaremos a página, e então teremos o seguinte resultado:
+
+ 24.96494647925858
+
+22.985397512168742
+
+
+Quando ela for processada, o que será atribuído à var imcFlacio é aquilo que está em return, neste caso, 10.
+ Assim, o valor do imcFlavio será 10. O mesmo acontecerá com o imcAmigo. Ao salvarmos e recarregarmos a página, teremos:
+
+10
+10
+
+Entretanto, não podemos retornar 10, e sim o cálculo do IMC. Da seguinte forma:
+
+function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+    return imc;
+
+}
+
+var imcFlavio = calculaImc(1.71, 73);
+var imcAmigo = calculaImc(1.72, 68);
+
+mostra(imcFlavio);
+mostra(imcAmigo);
+
+Podemos pensar no calculaImc() como se fosse uma pessoa a quem estivéssemos solicitando
+ que realizasse o cálculo do IMC. A pessoa perguntaria a altura e o peso, ao que responderíamos
+  com os dados do nosso exemplo, ou seja, 1.71 e 73. Ficaríamos esperando o resultado, dado para quem
+   chama a função por meio da cláusula return.
+
+Poderíamos colocar algo como return Flavio, mas assim seriam exibidas duas vezes a palavra Flavio na tela, sem nenhum 
+cálculo realizado. Não é isso que queremos, então definiremos como:
+
+function calculaImc(altura, peso) {
+
+    var imc = peso / (altura * altura);
+    return imc;
+
+}
+
+var imcFlavio = calculaImc(1.71, 73);
+var imcAmigo = calculaImc(1.72, 68);
+
+mostra(imcFlavio);
+mostra(imcAmigo);
+*/
+
+        
+
+    </script>
+</body>
+</html>
